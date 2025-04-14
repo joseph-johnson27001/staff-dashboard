@@ -18,7 +18,7 @@
 
         <!-- Dropdown for Counsellor Selection -->
         <div class="dropdown-container">
-          <label for="counsellor-select">Select Counsellor:</label>
+          <label for="counsellor-select"></label>
           <select id="counsellor-select" v-model="selectedCounsellor">
             <option
               v-for="(data, name) in counsellorData"
@@ -190,14 +190,18 @@ body {
 }
 
 .dropdown-container {
-  margin: 20px 0;
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .dropdown-container select {
-  padding: 6px 12px;
+  font-family: "Assistant";
+  padding: 8px 4px;
+  outline: none;
+  border-radius: 4px;
   font-size: 14px;
 }
 
