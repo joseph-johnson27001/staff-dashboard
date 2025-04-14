@@ -123,8 +123,9 @@ export default {
 <style scoped>
 .chart-container {
   width: 100%;
-  height: 300px;
+  height: 100%;
 }
+
 canvas {
   width: 100% !important;
   height: 100% !important;

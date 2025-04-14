@@ -116,7 +116,7 @@ export default {
         "Mar",
         "Apr",
       ],
-      clientChartCounts: [22, 30, 27, 35, 41, 38, 34, 30, 33, 37, 40, 42],
+      clientChartCounts: [15, 18, 14, 17, 12, 15, 15, 17, 18, 17, 16, 18],
     };
   },
 };

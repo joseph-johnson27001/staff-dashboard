@@ -28,7 +28,7 @@ export default {
   box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 4px;
   display: flex;
   flex-direction: column;
-  max-height: 350px;
+  max-height: 300px;
 }
 
 .chart-container {

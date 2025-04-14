@@ -42,24 +42,23 @@ export default {
 
 <style scoped>
 .card {
-  align-items: center;
   background: white;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 10px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   transition: background-color 0.1s linear;
   color: #345a98;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 4px;
 }
 
 .card-header {
   font-family: "Assistant", sans-serif;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
 }
 
@@ -67,8 +66,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   border-radius: 4px;
   margin-right: 7px;
 }
@@ -78,7 +77,7 @@ export default {
 }
 
 .value {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   color: #333;
 }
