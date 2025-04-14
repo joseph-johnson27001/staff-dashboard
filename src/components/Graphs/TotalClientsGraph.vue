@@ -15,6 +15,7 @@ import {
   Legend,
   BarController,
 } from "chart.js";
+import { toRaw } from "vue";
 
 ChartJS.register(
   BarController,
@@ -38,10 +39,6 @@ export default {
       isMounted: false,
     };
   },
-  watch: {
-    labels: "renderChart",
-    counts: "renderChart",
-  },
   mounted() {
     this.isMounted = true;
     this.$nextTick(() => {
@@ -54,12 +51,14 @@ export default {
     window.removeEventListener("resize", this.handleResize);
     this.destroyChart();
   },
+  watch: {
+    labels: "renderChart",
+    counts: "renderChart",
+  },
   methods: {
     renderChart() {
       if (!this.isMounted || !this.$refs.totalClientsChart) return;
-
       this.destroyChart();
-
       this.chartInstance = new ChartJS(this.$refs.totalClientsChart, {
         type: "bar",
         data: {
@@ -86,7 +85,6 @@ export default {
             y: {
               grid: { display: true },
               ticks: {
-                stepSize: 5,
                 color: "#333",
               },
             },
@@ -106,7 +104,7 @@ export default {
 
     destroyChart() {
       if (this.chartInstance) {
-        this.chartInstance.destroy();
+        toRaw(this.chartInstance).destroy();
         this.chartInstance = null;
       }
     },

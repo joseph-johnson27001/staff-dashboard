@@ -15,8 +15,24 @@
             :icon-container-color="stat.iconContainerColor"
           />
         </div>
+
+        <!-- Dropdown for Counsellor Selection -->
+        <div class="dropdown-container">
+          <label for="counsellor-select">Select Counsellor:</label>
+          <select id="counsellor-select" v-model="selectedCounsellor">
+            <option
+              v-for="(data, name) in counsellorData"
+              :key="name"
+              :value="name"
+            >
+              {{ name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Graph -->
         <div class="graph-container">
-          <GraphCard title="Total Clients">
+          <GraphCard :title="`Total Clients – ${selectedCounsellor}`">
             <TotalClientsChart
               :labels="clientChartLabels"
               :counts="clientChartCounts"
@@ -44,6 +60,7 @@ export default {
   },
   data() {
     return {
+      selectedCounsellor: "All Counsellors",
       stats: [
         {
           iconClass: "fas fa-user-friends",
@@ -116,8 +133,23 @@ export default {
         "Mar",
         "Apr",
       ],
-      clientChartCounts: [15, 18, 14, 17, 12, 15, 15, 17, 18, 17, 16, 18],
+      clientChartCounts: [],
+      counsellorData: {
+        "Counsellor 1": [17, 16, 15, 18, 16, 15, 17, 18, 16, 15, 17, 16],
+        "Counsellor 2": [14, 15, 16, 14, 15, 16, 14, 15, 14, 16, 15, 14],
+        "Counsellor 3": [13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15],
+        "Counsellor 4": [11, 12, 10, 11, 12, 11, 12, 10, 11, 12, 11, 12],
+        "All Counsellors": [55, 57, 56, 56, 57, 57, 56, 57, 56, 56, 57, 57],
+      },
     };
+  },
+  watch: {
+    selectedCounsellor: {
+      immediate: true,
+      handler(newVal) {
+        this.clientChartCounts = this.counsellorData[newVal] || [];
+      },
+    },
   },
 };
 </script>
@@ -157,9 +189,22 @@ body {
   margin-bottom: 15px;
 }
 
+.dropdown-container {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropdown-container select {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
 .graph-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
 }
 
 @media (max-width: 1200px) {
