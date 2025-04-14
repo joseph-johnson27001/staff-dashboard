@@ -51,12 +51,8 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  cursor: pointer;
   transition: background-color 0.1s linear;
-}
-
-.card:hover {
-  background-color: #f8f8f8;
+  color: #345a98;
 }
 
 .card-header {
@@ -65,7 +61,6 @@ export default {
   align-items: center;
   font-size: 16px;
   font-weight: 500;
-  color: #345a98;
 }
 
 .icon-container {
@@ -89,6 +84,5 @@ export default {
 .value {
   font-size: 16px;
   font-weight: 500;
-  color: #222;
 }
 </style>

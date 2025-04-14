@@ -91,7 +91,7 @@ body {
 .main-content {
   width: 100%;
   max-width: 1400px;
-  padding: 20px;
+  padding: 15px 20px;
   box-sizing: border-box;
 }
 
@@ -99,6 +99,6 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  margin-bottom: 2rem;
+  margin-bottom: 15px;
 }
 </style>
