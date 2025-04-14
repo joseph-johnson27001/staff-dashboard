@@ -71,10 +71,10 @@ export default {
     return {
       selectedCounsellor: "All Counsellors",
       counsellorData: {
-        "Counsellor 1": "Counsellor 1",
-        "Counsellor 2": "Counsellor 2",
-        "Counsellor 3": "Counsellor 3",
-        "Counsellor 4": "Counsellor 4",
+        "Rebecca McDonnell": "Rebecca McDonnell",
+        "Elly Messo": "Elly Messo",
+        "Lorena  Halpin-Doyle": "Lorena  Halpin-Doyle",
+        "Joanne Barnuevo": "Joanne Barnuevo",
         "All Counsellors": "All Counsellors",
       },
       stats: [
@@ -87,7 +87,7 @@ export default {
         },
         {
           iconClass: "fas fa-hand-paper",
-          statName: "Students Seeking Counselling",
+          statName: "Students Who Accessed Counselling",
           value: "12",
           iconColor: "#ff9f43",
           iconContainerColor: "rgba(255, 159, 67, 0.1)",
@@ -150,17 +150,21 @@ export default {
         "Apr",
       ],
       totalClients: {
-        "Counsellor 1": [17, 16, 15, 18, 16, 15, 17, 18, 16, 15, 17, 16],
-        "Counsellor 2": [14, 15, 16, 14, 15, 16, 14, 15, 14, 16, 15, 14],
-        "Counsellor 3": [13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15],
-        "Counsellor 4": [11, 12, 10, 11, 12, 11, 12, 10, 11, 12, 11, 12],
+        "Rebecca McDonnell": [17, 16, 15, 18, 16, 15, 17, 18, 16, 15, 17, 16],
+        "Elly Messo": [14, 15, 16, 14, 15, 16, 14, 15, 14, 16, 15, 14],
+        "Lorena  Halpin-Doyle": [
+          13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15,
+        ],
+        "Joanne Barnuevo": [11, 12, 10, 11, 12, 11, 12, 10, 11, 12, 11, 12],
         "All Counsellors": [55, 57, 56, 56, 57, 57, 56, 57, 56, 56, 57, 57],
       },
       sessionHours: {
-        "Counsellor 1": [34, 32, 30, 36, 32, 30, 34, 36, 32, 30, 34, 32],
-        "Counsellor 2": [28, 30, 32, 28, 30, 32, 28, 30, 28, 32, 30, 28],
-        "Counsellor 3": [26, 28, 30, 26, 28, 30, 26, 28, 30, 26, 28, 30],
-        "Counsellor 4": [22, 24, 20, 22, 24, 22, 24, 20, 22, 24, 22, 24],
+        "Rebecca McDonnell": [34, 32, 30, 36, 32, 30, 34, 36, 32, 30, 34, 32],
+        "Elly Messo": [28, 30, 32, 28, 30, 32, 28, 30, 28, 32, 30, 28],
+        "Lorena  Halpin-Doyle": [
+          26, 28, 30, 26, 28, 30, 26, 28, 30, 26, 28, 30,
+        ],
+        "Joanne Barnuevo": [22, 24, 20, 22, 24, 22, 24, 20, 22, 24, 22, 24],
         "All Counsellors": [
           110, 114, 112, 112, 114, 114, 112, 114, 112, 112, 114, 114,
         ],
