@@ -15,6 +15,14 @@
             :icon-container-color="stat.iconContainerColor"
           />
         </div>
+        <div class="graph-container">
+          <GraphCard title="Total Clients">
+            <TotalClientsChart
+              :labels="clientChartLabels"
+              :counts="clientChartCounts"
+            />
+          </GraphCard>
+        </div>
       </div>
     </div>
   </div>
@@ -23,12 +31,16 @@
 <script>
 import TopNav from "./components/Navigation/TopNav.vue";
 import StatisticsCard from "./components/UI/StatisticsCard.vue";
+import GraphCard from "./components/UI/GraphCard.vue";
+import TotalClientsChart from "./components/Graphs/TotalClientsGraph.vue";
 
 export default {
   name: "App",
   components: {
     TopNav,
     StatisticsCard,
+    GraphCard,
+    TotalClientsChart,
   },
   data() {
     return {
@@ -90,6 +102,21 @@ export default {
           iconContainerColor: "rgba(27, 201, 142, 0.1)",
         },
       ],
+      clientChartLabels: [
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+      ],
+      clientChartCounts: [22, 30, 27, 35, 41, 38, 34, 30, 33, 37, 40, 42],
     };
   },
 };
@@ -130,9 +157,20 @@ body {
   margin-bottom: 15px;
 }
 
+.graph-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 @media (max-width: 1200px) {
   .stats-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .graph-container {
+    grid-template-columns: 1fr;
   }
 }
 
