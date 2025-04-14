@@ -49,7 +49,7 @@ export default {
         },
         {
           iconClass: "fas fa-clock",
-          statName: "Waitlisted",
+          statName: "Wait List",
           value: "6",
           iconColor: "#ea5455",
           iconContainerColor: "rgba(234, 84, 85, 0.1)",
@@ -61,6 +61,34 @@ export default {
           iconColor: "#00cfe8",
           iconContainerColor: "rgba(0, 207, 232, 0.1)",
         },
+        {
+          iconClass: "fas fa-user-clock",
+          statName: "Average Wait Time",
+          value: "12 days",
+          iconColor: "#7367f0",
+          iconContainerColor: "rgba(115, 103, 240, 0.1)",
+        },
+        {
+          iconClass: "fas fa-users-cog",
+          statName: "Avg Students per Counsellor",
+          value: "11.3",
+          iconColor: "#00cfe8",
+          iconContainerColor: "rgba(0, 207, 232, 0.1)",
+        },
+        {
+          iconClass: "fas fa-ban",
+          statName: "No Shows",
+          value: "15%",
+          iconColor: "#ff6f91",
+          iconContainerColor: "rgba(255, 111, 145, 0.1)",
+        },
+        {
+          iconClass: "fas fa-user-check",
+          statName: "Avg Sessions per Student",
+          value: "3.8",
+          iconColor: "#1bc98e",
+          iconContainerColor: "rgba(27, 201, 142, 0.1)",
+        },
       ],
     };
   },
@@ -70,7 +98,7 @@ export default {
 <style>
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
+  font-family: "Assistant", sans-serif;
   background-color: #f9f9f9;
 }
 
@@ -100,5 +128,17 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin-bottom: 15px;
+}
+
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

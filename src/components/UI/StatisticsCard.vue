@@ -67,22 +67,19 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 4px;
-  margin-right: 10px;
+  margin-right: 7px;
 }
 
 .icon-container i {
-  font-size: 20px;
-}
-
-.stat-name {
-  margin-right: 5px;
+  font-size: 18px;
 }
 
 .value {
   font-size: 16px;
   font-weight: 500;
+  color: #333;
 }
 </style>
