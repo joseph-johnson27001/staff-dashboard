@@ -1,6 +1,6 @@
 <template>
   <div class="chart-container">
-    <canvas ref="totalClientsChart"></canvas>
+    <canvas ref="totalSessionHoursChart"></canvas>
   </div>
 </template>
 
@@ -28,10 +28,10 @@ ChartJS.register(
 );
 
 export default {
-  name: "TotalClientsChart",
+  name: "TotalSessionHoursChart",
   props: {
     labels: Array,
-    counts: Array,
+    sessionHours: Array,
   },
   data() {
     return {
@@ -53,20 +53,25 @@ export default {
   },
   watch: {
     labels: "renderChart",
-    counts: "renderChart",
+    sessionHours: "renderChart",
   },
   methods: {
     renderChart() {
-      if (!this.isMounted || !this.$refs.totalClientsChart) return;
+      if (!this.isMounted || !this.$refs.totalSessionHoursChart) return;
+
       this.destroyChart();
-      this.chartInstance = new ChartJS(this.$refs.totalClientsChart, {
+
+      const rawLabels = toRaw(this.labels) || [];
+      const rawSessionHours = toRaw(this.sessionHours) || [];
+
+      this.chartInstance = new ChartJS(this.$refs.totalSessionHoursChart, {
         type: "bar",
         data: {
-          labels: this.labels || [],
+          labels: rawLabels,
           datasets: [
             {
-              label: "Clients per Month",
-              data: this.counts || [],
+              label: "Total Session Hours",
+              data: rawSessionHours,
               borderColor: "rgba(34, 139, 34, 1)",
               backgroundColor: "rgba(34, 139, 34, 0.2)",
               hoverBackgroundColor: "rgba(34, 139, 34, 0.4)",
@@ -94,7 +99,7 @@ export default {
             tooltip: {
               callbacks: {
                 label: (tooltipItem) =>
-                  `${tooltipItem.raw.toLocaleString()} clients`,
+                  `${tooltipItem.raw.toLocaleString()} hours`,
               },
             },
           },

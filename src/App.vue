@@ -35,7 +35,14 @@
           <GraphCard :title="`Total Clients – ${selectedCounsellor}`">
             <TotalClientsChart
               :labels="clientChartLabels"
-              :counts="clientChartCounts"
+              :counts="totalClients[selectedCounsellor]"
+            />
+          </GraphCard>
+
+          <GraphCard :title="`Total Session Hours – ${selectedCounsellor}`">
+            <TotalSessionHoursChart
+              :labels="clientChartLabels"
+              :session-hours="sessionHours[selectedCounsellor]"
             />
           </GraphCard>
         </div>
@@ -49,6 +56,7 @@ import TopNav from "./components/Navigation/TopNav.vue";
 import StatisticsCard from "./components/UI/StatisticsCard.vue";
 import GraphCard from "./components/UI/GraphCard.vue";
 import TotalClientsChart from "./components/Graphs/TotalClientsGraph.vue";
+import TotalSessionHoursChart from "./components/Graphs/TotalSessionHoursGraph.vue";
 
 export default {
   name: "App",
@@ -57,21 +65,29 @@ export default {
     StatisticsCard,
     GraphCard,
     TotalClientsChart,
+    TotalSessionHoursChart,
   },
   data() {
     return {
       selectedCounsellor: "All Counsellors",
+      counsellorData: {
+        "Counsellor 1": "Counsellor 1",
+        "Counsellor 2": "Counsellor 2",
+        "Counsellor 3": "Counsellor 3",
+        "Counsellor 4": "Counsellor 4",
+        "All Counsellors": "All Counsellors",
+      },
       stats: [
         {
           iconClass: "fas fa-user-friends",
-          statName: "In Counselling",
+          statName: "Students In Counselling",
           value: "45",
           iconColor: "#28c76f",
           iconContainerColor: "rgba(40, 199, 111, 0.1)",
         },
         {
           iconClass: "fas fa-hand-paper",
-          statName: "Seeking Counselling",
+          statName: "Students Seeking Counselling",
           value: "12",
           iconColor: "#ff9f43",
           iconContainerColor: "rgba(255, 159, 67, 0.1)",
@@ -133,13 +149,21 @@ export default {
         "Mar",
         "Apr",
       ],
-      clientChartCounts: [],
-      counsellorData: {
+      totalClients: {
         "Counsellor 1": [17, 16, 15, 18, 16, 15, 17, 18, 16, 15, 17, 16],
         "Counsellor 2": [14, 15, 16, 14, 15, 16, 14, 15, 14, 16, 15, 14],
         "Counsellor 3": [13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15],
         "Counsellor 4": [11, 12, 10, 11, 12, 11, 12, 10, 11, 12, 11, 12],
         "All Counsellors": [55, 57, 56, 56, 57, 57, 56, 57, 56, 56, 57, 57],
+      },
+      sessionHours: {
+        "Counsellor 1": [34, 32, 30, 36, 32, 30, 34, 36, 32, 30, 34, 32],
+        "Counsellor 2": [28, 30, 32, 28, 30, 32, 28, 30, 28, 32, 30, 28],
+        "Counsellor 3": [26, 28, 30, 26, 28, 30, 26, 28, 30, 26, 28, 30],
+        "Counsellor 4": [22, 24, 20, 22, 24, 22, 24, 20, 22, 24, 22, 24],
+        "All Counsellors": [
+          110, 114, 112, 112, 114, 114, 112, 114, 112, 112, 114, 114,
+        ],
       },
     };
   },
@@ -147,7 +171,8 @@ export default {
     selectedCounsellor: {
       immediate: true,
       handler(newVal) {
-        this.clientChartCounts = this.counsellorData[newVal] || [];
+        this.clientChartCounts = this.totalClients[newVal] || [];
+        this.selectedSessionHours = this.sessionHours[newVal] || [];
       },
     },
   },
@@ -195,6 +220,7 @@ body {
   gap: 10px;
   width: 100%;
   justify-content: flex-end;
+  margin-bottom: 10px;
 }
 
 .dropdown-container select {
