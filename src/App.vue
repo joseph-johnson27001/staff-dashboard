@@ -220,7 +220,7 @@ body {
   gap: 10px;
   width: 100%;
   justify-content: flex-end;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .dropdown-container select {
