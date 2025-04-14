@@ -71,11 +71,11 @@ export default {
     return {
       selectedCounsellor: "All Counsellors",
       counsellorData: {
+        "All Counsellors": "All Counsellors",
         "Rebecca McDonnell": "Rebecca McDonnell",
         "Elly Messo": "Elly Messo",
         "Lorena  Halpin-Doyle": "Lorena  Halpin-Doyle",
         "Joanne Barnuevo": "Joanne Barnuevo",
-        "All Counsellors": "All Counsellors",
       },
       stats: [
         {
@@ -86,11 +86,11 @@ export default {
           iconContainerColor: "rgba(40, 199, 111, 0.1)",
         },
         {
-          iconClass: "fas fa-hand-paper",
-          statName: "Students Who Accessed Counselling",
-          value: "12",
-          iconColor: "#ff9f43",
-          iconContainerColor: "rgba(255, 159, 67, 0.1)",
+          iconClass: "fas fa-ban",
+          statName: "Cancellations",
+          value: "15%",
+          iconColor: "#ff6f91",
+          iconContainerColor: "rgba(255, 111, 145, 0.1)",
         },
         {
           iconClass: "fas fa-clock",
@@ -106,6 +106,7 @@ export default {
           iconColor: "#00cfe8",
           iconContainerColor: "rgba(0, 207, 232, 0.1)",
         },
+
         {
           iconClass: "fas fa-user-clock",
           statName: "Average Wait Time",
@@ -114,26 +115,27 @@ export default {
           iconContainerColor: "rgba(115, 103, 240, 0.1)",
         },
         {
-          iconClass: "fas fa-users-cog",
-          statName: "Avg Students per Counsellor",
-          value: "11.3",
-          iconColor: "#00cfe8",
-          iconContainerColor: "rgba(0, 207, 232, 0.1)",
+          iconClass: "fas fa-hand-paper",
+          statName: "Total Students Who Accessed Counselling",
+          value: "12",
+          iconColor: "#ff9f43",
+          iconContainerColor: "rgba(255, 159, 67, 0.1)",
         },
-        {
-          iconClass: "fas fa-ban",
-          statName: "No Shows",
-          value: "15%",
-          iconColor: "#ff6f91",
-          iconContainerColor: "rgba(255, 111, 145, 0.1)",
-        },
-        {
-          iconClass: "fas fa-user-check",
-          statName: "Avg Sessions per Student",
-          value: "3.8",
-          iconColor: "#1bc98e",
-          iconContainerColor: "rgba(27, 201, 142, 0.1)",
-        },
+        // {
+        //   iconClass: "fas fa-users-cog",
+        //   statName: "Avg Students per Counsellor",
+        //   value: "11.3",
+        //   iconColor: "#00cfe8",
+        //   iconContainerColor: "rgba(0, 207, 232, 0.1)",
+        // },
+
+        // {
+        //   iconClass: "fas fa-user-check",
+        //   statName: "Avg Sessions per Student",
+        //   value: "3.8",
+        //   iconColor: "#1bc98e",
+        //   iconContainerColor: "rgba(27, 201, 142, 0.1)",
+        // },
       ],
       clientChartLabels: [
         "May",
@@ -213,7 +215,7 @@ body {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin-bottom: 15px;
 }

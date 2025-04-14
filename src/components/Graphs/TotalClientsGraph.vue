@@ -7,19 +7,21 @@
 <script>
 import {
   Chart as ChartJS,
-  BarElement,
+  LineElement,
+  PointElement,
   CategoryScale,
   LinearScale,
   Title,
   Tooltip,
   Legend,
-  BarController,
+  LineController,
 } from "chart.js";
 import { toRaw } from "vue";
 
 ChartJS.register(
-  BarController,
-  BarElement,
+  LineController,
+  LineElement,
+  PointElement,
   CategoryScale,
   LinearScale,
   Title,
@@ -58,19 +60,29 @@ export default {
   methods: {
     renderChart() {
       if (!this.isMounted || !this.$refs.totalClientsChart) return;
+
       this.destroyChart();
+
+      const rawLabels = toRaw(this.labels) || [];
+      const rawCounts = toRaw(this.counts) || [];
+
       this.chartInstance = new ChartJS(this.$refs.totalClientsChart, {
-        type: "bar",
+        type: "line",
         data: {
-          labels: this.labels || [],
+          labels: rawLabels,
           datasets: [
             {
               label: "Clients per Month",
-              data: this.counts || [],
-              borderColor: "rgba(34, 139, 34, 1)",
+              data: rawCounts,
+              fill: false,
+              borderColor: "#0288d1",
               backgroundColor: "rgba(34, 139, 34, 0.2)",
-              hoverBackgroundColor: "rgba(34, 139, 34, 0.4)",
-              borderWidth: 1,
+              tension: 0.2,
+              borderWidth: 2,
+              pointBackgroundColor: "#0288d1",
+              pointBorderColor: "#fff",
+              pointBorderWidth: 2,
+              pointRadius: 5,
             },
           ],
         },
@@ -84,9 +96,7 @@ export default {
             },
             y: {
               grid: { display: true },
-              ticks: {
-                color: "#333",
-              },
+              ticks: { color: "#333" },
             },
           },
           plugins: {
@@ -122,6 +132,7 @@ export default {
 .chart-container {
   width: 100%;
   height: 100%;
+  min-height: 250px;
 }
 
 canvas {
