@@ -3,7 +3,7 @@
     <TopNav />
     <div class="content-wrapper">
       <div class="main-content">
-        <h3>Department Information</h3>
+        <h3>Overall Information</h3>
         <!-- stat Cards Row -->
         <div class="stats-grid">
           <StatisticsCard
@@ -21,7 +21,7 @@
           <GraphCard title="Themes">
             <ThemesChart :themes="themes" />
           </GraphCard>
-          <GraphCard title="Budget">
+          <GraphCard title="Expenses">
             <BudgetChart
               :total="budget.total"
               :categories="budget.categories"
@@ -96,6 +96,25 @@
               "
             />
           </GraphCard>
+
+          <GraphCard
+            :title="`Ratings – ${selectedCounsellor} (${
+              viewType.charAt(0).toUpperCase() + viewType.slice(1)
+            })`"
+          >
+            <RatingsGraph
+              :labels="
+                viewType === 'monthly'
+                  ? clientChartLabels
+                  : clientChartWeeklyLabels
+              "
+              :ratings="
+                viewType === 'monthly'
+                  ? ratingMonthlyScores[selectedCounsellor]
+                  : ratingWeeklyScores[selectedCounsellor]
+              "
+            />
+          </GraphCard>
         </div>
       </div>
     </div>
@@ -109,6 +128,7 @@ import BudgetChart from "./components/Graphs/BudgetChart.vue";
 import ThemesChart from "./components/Graphs/ThemesChart.vue";
 import TotalClientsChart from "./components/Graphs/TotalClientsGraph.vue";
 import TotalSessionHoursChart from "./components/Graphs/TotalSessionHoursGraph.vue";
+import RatingsGraph from "./components/Graphs/RatingsGraph.vue";
 
 export default {
   name: "App",
@@ -120,6 +140,7 @@ export default {
     ThemesChart,
     TotalClientsChart,
     TotalSessionHoursChart,
+    RatingsGraph,
   },
   data() {
     return {
@@ -149,7 +170,7 @@ export default {
         "All Counsellors": "All Counsellors",
         "Rebecca McDonnell": "Rebecca McDonnell",
         "Elly Messo": "Elly Messo",
-        "Lorena  Halpin-Doyle": "Lorena  Halpin-Doyle",
+        "Lorena Halpin-Doyle": "Lorena Halpin-Doyle",
         "Joanne Barnuevo": "Joanne Barnuevo",
       },
       stats: [
@@ -281,9 +302,7 @@ export default {
       totalClients: {
         "Rebecca McDonnell": [18, 16, 15, 18, 16, 15, 17, 18, 16, 15, 17, 16],
         "Elly Messo": [14, 15, 16, 14, 15, 16, 14, 15, 14, 16, 15, 14],
-        "Lorena  Halpin-Doyle": [
-          13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15,
-        ],
+        "Lorena Halpin-Doyle": [13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15],
         "Joanne Barnuevo": [11, 12, 10, 11, 12, 11, 12, 10, 11, 12, 11, 12],
         "All Counsellors": [55, 57, 56, 56, 57, 57, 56, 57, 56, 56, 57, 57],
       },
@@ -300,7 +319,7 @@ export default {
           13, 14, 12, 13, 14, 12, 11, 13, 14, 12, 13, 12, 14, 13, 14, 13, 12,
           11,
         ],
-        "Lorena  Halpin-Doyle": [
+        "Lorena Halpin-Doyle": [
           11, 13, 12, 14, 13, 14, 12, 13, 14, 13, 12, 13, 14, 13, 12, 13, 12,
           13, 14, 13, 12, 13, 14, 12, 13, 14, 13, 12, 13, 14, 13, 12, 13, 12,
           13, 14, 13, 12, 13, 14, 13, 12, 13, 12, 13, 14, 13, 12, 13, 14, 13,
@@ -322,9 +341,7 @@ export default {
       sessionHours: {
         "Rebecca McDonnell": [34, 32, 30, 36, 32, 30, 34, 36, 32, 30, 34, 32],
         "Elly Messo": [28, 30, 32, 28, 30, 32, 28, 30, 28, 32, 30, 28],
-        "Lorena  Halpin-Doyle": [
-          26, 28, 30, 26, 28, 30, 26, 28, 30, 26, 28, 30,
-        ],
+        "Lorena Halpin-Doyle": [26, 28, 30, 26, 28, 30, 26, 28, 30, 26, 28, 30],
         "Joanne Barnuevo": [22, 24, 20, 22, 24, 22, 24, 20, 22, 24, 22, 24],
         "All Counsellors": [
           110, 114, 112, 112, 114, 114, 112, 114, 112, 112, 114, 114,
@@ -343,7 +360,7 @@ export default {
           23, 24, 23, 22, 21, 22, 23, 24, 25, 23, 22, 24, 25, 23, 24, 22, 21,
           22,
         ],
-        "Lorena  Halpin-Doyle": [
+        "Lorena Halpin-Doyle": [
           18, 20, 21, 22, 19, 20, 21, 22, 21, 19, 18, 22, 20, 21, 22, 19, 21,
           20, 21, 20, 22, 21, 20, 19, 22, 21, 22, 19, 20, 21, 20, 22, 21, 19,
           20, 21, 22, 19, 20, 21, 22, 19, 20, 21, 22, 19, 20, 22, 21, 20, 21,
@@ -360,6 +377,56 @@ export default {
           110, 112, 114, 116, 118, 120, 122, 124, 126, 128, 130, 132, 134, 136,
           138, 140, 142, 144, 146, 148, 150, 152, 154, 156, 158, 160, 162, 164,
           166, 168, 170, 172, 174, 176, 178, 180, 182, 184,
+        ],
+      },
+      ratingMonthlyScores: {
+        "Rebecca McDonnell": [
+          9.0, 8.8, 8.6, 9.2, 8.8, 8.6, 9.0, 9.2, 8.8, 8.6, 9.0, 8.8,
+        ],
+        "Elly Messo": [
+          8.6, 8.8, 9.0, 8.6, 8.8, 9.0, 8.6, 8.8, 8.6, 9.0, 8.8, 8.6,
+        ],
+        "Lorena Halpin-Doyle": [
+          8.4, 8.6, 8.8, 8.4, 8.6, 8.8, 8.4, 8.6, 8.8, 8.4, 8.6, 8.8,
+        ],
+        "Joanne Barnuevo": [
+          9.8, 10.0, 9.8, 10.0, 9.8, 10.0, 9.8, 10.0, 9.8, 10.0, 9.8, 10.0,
+        ],
+        "All Counsellors": [
+          8.4, 8.5, 8.4, 8.4, 8.5, 8.5, 8.4, 8.5, 8.4, 8.4, 8.5, 8.5,
+        ],
+      },
+      ratingWeeklyScores: {
+        "Rebecca McDonnell": [
+          8.4, 8.5, 8.6, 8.7, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.0, 9.1, 9.2, 9.0,
+          9.1, 9.0, 9.1, 9.2, 8.9, 8.8, 8.9, 9.1, 9.2, 9.0, 8.9, 8.8, 8.9, 9.1,
+          9.2, 9.0, 8.9, 8.7, 8.6, 8.7, 8.8, 8.9, 9.0, 9.1, 9.2, 9.0, 8.9, 9.1,
+          9.2, 9.0, 8.9, 8.8, 9.0, 9.1, 9.2, 9.0, 8.9, 9.1,
+        ],
+        "Elly Messo": [
+          8.2, 8.3, 8.4, 8.2, 8.3, 8.4, 8.5, 8.3, 8.4, 8.3, 8.2, 8.1, 8.2, 8.3,
+          8.4, 8.5, 8.3, 8.4, 8.5, 8.4, 8.3, 8.3, 8.2, 8.3, 8.4, 8.5, 8.3, 8.4,
+          8.2, 8.1, 8.2, 8.3, 8.4, 8.2, 8.3, 8.4, 8.3, 8.2, 8.1, 8.2, 8.3, 8.4,
+          8.5, 8.3, 8.2, 8.4, 8.5, 8.3, 8.4, 8.2, 8.1, 8.2,
+        ],
+        "Lorena Halpin-Doyle": [
+          7.8, 8.0, 8.1, 8.2, 7.9, 8.0, 8.1, 8.2, 8.1, 7.9, 7.8, 8.2, 8.0, 8.1,
+          8.2, 7.9, 8.1, 8.0, 8.1, 8.0, 8.2, 8.1, 8.0, 7.9, 8.2, 8.1, 8.2, 7.9,
+          8.0, 8.1, 8.0, 8.2, 8.1, 7.9, 8.0, 8.1, 8.2, 7.9, 8.0, 8.1, 8.2, 7.9,
+          8.0, 8.1, 8.2, 7.9, 8.0, 8.2, 8.1, 8.0, 8.1, 8.2,
+        ],
+        "Joanne Barnuevo": [
+          9.5, 9.6, 9.7, 9.8, 9.7, 9.6, 9.5, 9.6, 9.7, 9.8, 9.9, 10.0, 9.9,
+          10.0, 9.8, 9.7, 9.8, 9.9, 10.0, 9.8, 9.9, 10.0, 9.9, 9.8, 9.6, 9.7,
+          9.8, 9.7, 9.9, 10.0, 10.1, 10.0, 9.9, 9.8, 9.9, 10.0, 9.8, 9.7, 9.6,
+          9.8, 9.7, 9.9, 10.0, 10.1, 10.2, 10.0, 9.9, 10.1, 10.0, 9.9, 9.8, 9.7,
+        ],
+        "All Counsellors": [
+          8.0, 8.5, 8.8, 9.0, 8.5, 8.8, 9.0, 9.2, 9.5, 9.8, 10.0, 10.2, 10.5,
+          10.6, 10.7, 10.8, 11.0, 11.2, 11.4, 11.6, 11.8, 12.0, 12.2, 12.4,
+          12.6, 12.8, 13.0, 13.2, 13.4, 13.6, 13.8, 14.0, 14.2, 14.4, 14.6,
+          14.8, 15.0, 15.2, 15.4, 15.6, 15.8, 16.0, 16.2, 16.4, 16.6, 16.8,
+          17.0, 17.2, 17.4, 17.6, 17.8, 18.0, 18.2, 18.4,
         ],
       },
       viewType: "monthly",
@@ -380,7 +447,7 @@ export default {
 <style>
 body {
   margin: 0;
-  font-family: "Assistant", sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #f9f9f9;
 }
 
@@ -423,6 +490,7 @@ h3 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0;
 }
 
 .dropdowns {

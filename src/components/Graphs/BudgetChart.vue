@@ -169,7 +169,6 @@ export default {
 .chart-container {
   width: 100%;
   height: 250px;
-  margin-top: 20px;
 }
 canvas {
   width: 100% !important;
