@@ -98,6 +98,7 @@ export default {
               grid: { display: true },
               ticks: { color: "#333" },
               min: 0,
+              max: 10,
             },
           },
           plugins: {
