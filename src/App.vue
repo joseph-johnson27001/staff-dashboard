@@ -16,6 +16,24 @@
           />
         </div>
 
+        <div class="graph-container">
+          <div>
+            <h3>Budget</h3>
+            <BudgetChart
+              :total="budget.total"
+              :categories="budget.categories"
+            />
+          </div>
+
+          <div>
+            <h3>Themes</h3>
+            <ThemesChart
+              :total="budget.total"
+              :categories="budget.categories"
+            />
+          </div>
+        </div>
+
         <!-- Dropdown for Counsellor Selection -->
         <div class="dropdown-container">
           <label for="counsellor-select"></label>
@@ -55,6 +73,7 @@
 import TopNav from "./components/Navigation/TopNav.vue";
 import StatisticsCard from "./components/UI/StatisticsCard.vue";
 import GraphCard from "./components/UI/GraphCard.vue";
+import BudgetChart from "./components/Graphs/BudgetChart.vue";
 import TotalClientsChart from "./components/Graphs/TotalClientsGraph.vue";
 import TotalSessionHoursChart from "./components/Graphs/TotalSessionHoursGraph.vue";
 
@@ -64,11 +83,21 @@ export default {
     TopNav,
     StatisticsCard,
     GraphCard,
+    BudgetChart,
     TotalClientsChart,
     TotalSessionHoursChart,
   },
   data() {
     return {
+      budget: {
+        total: 50000,
+        categories: {
+          "Furniture & Equipment": 15000,
+          "Student Materials": 12000,
+          "Training & Development": 5000,
+          Miscellaneous: 3000,
+        },
+      },
       selectedCounsellor: "All Counsellors",
       counsellorData: {
         "All Counsellors": "All Counsellors",
@@ -213,6 +242,12 @@ body {
   box-sizing: border-box;
 }
 
+h3 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #0f3659;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -227,6 +262,7 @@ body {
   width: 100%;
   justify-content: flex-end;
   margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .dropdown-container select {
