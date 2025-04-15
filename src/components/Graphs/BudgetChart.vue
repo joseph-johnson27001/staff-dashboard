@@ -1,24 +1,34 @@
 <template>
   <div class="chart-container">
-    <canvas ref="budgetPieChart"></canvas>
+    <canvas ref="budgetBarChart"></canvas>
   </div>
 </template>
 
 <script>
 import {
   Chart as ChartJS,
-  ArcElement,
+  BarElement,
+  CategoryScale,
+  LinearScale,
   Tooltip,
   Legend,
   Title,
-  PieController,
+  BarController,
 } from "chart.js";
 import { toRaw } from "vue";
 
-ChartJS.register(PieController, ArcElement, Tooltip, Legend, Title);
+ChartJS.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+  Title
+);
 
 export default {
-  name: "BudgetPieChart",
+  name: "BudgetBarChart",
   props: {
     total: {
       type: Number,
@@ -55,7 +65,7 @@ export default {
   },
   methods: {
     renderChart() {
-      if (!this.isMounted || !this.$refs.budgetPieChart) return;
+      if (!this.isMounted || !this.$refs.budgetBarChart) return;
 
       this.destroyChart();
 
@@ -66,52 +76,72 @@ export default {
 
       const labels = [...categoryEntries.map(([key]) => key), "Remaining"];
       const data = [...categoryEntries.map(([, value]) => value), remaining];
-      const colors = [
-        "#42a5f5",
-        "#66bb6a",
-        "#ffa726",
-        "#ab47bc",
-        "#ef5350",
-        "#26c6da",
-        "#ffca28",
-        "#7e57c2",
-        "#26a69a",
-        "#ec407a",
-        "#9ccc65",
-        "#5c6bc0",
-        "#ff7043",
-        "#8d6e63",
-        "#29b6f6",
+
+      const baseColors = [
+        "34, 139, 34",
+        "70, 130, 180",
+        "255, 140, 0",
+        "186, 85, 211",
+        "220, 20, 60",
+        "0, 191, 255",
+        "218, 165, 32",
+        "123, 104, 238",
+        "60, 179, 113",
+        "255, 99, 132",
+        "153, 102, 255",
+        "255, 159, 64",
+        "100, 149, 237",
+        "244, 164, 96",
+        "0, 206, 209",
       ];
 
-      this.chartInstance = new ChartJS(this.$refs.budgetPieChart, {
-        type: "pie",
+      const backgroundColors = baseColors
+        .slice(0, labels.length)
+        .map((rgb) => `rgba(${rgb}, 0.2)`);
+      const borderColors = baseColors
+        .slice(0, labels.length)
+        .map((rgb) => `rgba(${rgb}, 1)`);
+
+      this.chartInstance = new ChartJS(this.$refs.budgetBarChart, {
+        type: "bar",
         data: {
           labels,
           datasets: [
             {
               data,
-              backgroundColor: colors,
-              borderColor: "#fff",
-              borderWidth: 2,
+              backgroundColor: backgroundColors,
+              borderColor: borderColors,
+              hoverBackgroundColor: backgroundColors.map((c) =>
+                c.replace("0.2", "0.4")
+              ),
+              borderWidth: 1,
             },
           ],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: true,
-              position: "right",
-              labels: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: (value) => `£${value.toLocaleString()}`,
                 color: "#333",
               },
             },
+            x: {
+              ticks: {
+                color: "#333",
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
             tooltip: {
               callbacks: {
-                label: (tooltipItem) =>
-                  `${tooltipItem.label}: £${tooltipItem.raw.toLocaleString()}`,
+                label: (tooltipItem) => `£${tooltipItem.raw.toLocaleString()}`,
               },
             },
           },

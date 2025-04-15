@@ -3,6 +3,7 @@
     <TopNav />
     <div class="content-wrapper">
       <div class="main-content">
+        <h3>Department Information</h3>
         <!-- stat Cards Row -->
         <div class="stats-grid">
           <StatisticsCard
@@ -17,41 +18,42 @@
         </div>
 
         <div class="graph-container">
-          <div>
-            <h3>Themes</h3>
+          <GraphCard title="Themes">
             <ThemesChart :themes="themes" />
-          </div>
-          <div>
-            <h3>Budget</h3>
+          </GraphCard>
+          <GraphCard title="Budget">
             <BudgetChart
               :total="budget.total"
               :categories="budget.categories"
             />
-          </div>
+          </GraphCard>
         </div>
 
-        <div class="dropdowns">
-          <!-- Dropdown for Weekly/Monthly Selection -->
-          <div class="dropdown-container">
-            <label for="view-select"></label>
-            <select id="view-select" v-model="viewType">
-              <option value="monthly">Monthly</option>
-              <option value="weekly">Weekly</option>
-            </select>
-          </div>
+        <div class="counselling-heading">
+          <h3>Counselling Information</h3>
+          <div class="dropdowns">
+            <!-- Dropdown for Weekly/Monthly Selection -->
+            <div class="dropdown-container">
+              <label for="view-select"></label>
+              <select id="view-select" v-model="viewType">
+                <option value="monthly">Monthly</option>
+                <option value="weekly">Weekly</option>
+              </select>
+            </div>
 
-          <!-- Dropdown for Counsellor Selection -->
-          <div class="dropdown-container">
-            <label for="counsellor-select"></label>
-            <select id="counsellor-select" v-model="selectedCounsellor">
-              <option
-                v-for="(data, name) in counsellorData"
-                :key="name"
-                :value="name"
-              >
-                {{ name }}
-              </option>
-            </select>
+            <!-- Dropdown for Counsellor Selection -->
+            <div class="dropdown-container">
+              <label for="counsellor-select"></label>
+              <select id="counsellor-select" v-model="selectedCounsellor">
+                <option
+                  v-for="(data, name) in counsellorData"
+                  :key="name"
+                  :value="name"
+                >
+                  {{ name }}
+                </option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -414,6 +416,13 @@ h3 {
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin-bottom: 15px;
+}
+
+.counselling-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dropdowns {
