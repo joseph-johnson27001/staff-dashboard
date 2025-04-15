@@ -18,16 +18,15 @@
 
         <div class="graph-container">
           <div>
+            <h3>Themes</h3>
+            <ThemesChart :themes="themes" />
+          </div>
+          <div>
             <h3>Budget</h3>
             <BudgetChart
               :total="budget.total"
               :categories="budget.categories"
             />
-          </div>
-
-          <div>
-            <h3>Themes</h3>
-            <ThemesChart :themes="themes" />
           </div>
         </div>
 
@@ -161,21 +160,21 @@ export default {
           iconColor: "#ff9f43",
           iconContainerColor: "rgba(255, 159, 67, 0.1)",
         },
-        // {
-        //   iconClass: "fas fa-users-cog",
-        //   statName: "Avg Students per Counsellor",
-        //   value: "11.3",
-        //   iconColor: "#00cfe8",
-        //   iconContainerColor: "rgba(0, 207, 232, 0.1)",
-        // },
+        {
+          iconClass: "fas fa-wallet",
+          statName: "Total Budget",
+          value: "£50,000",
+          iconColor: "#34c38f",
+          iconContainerColor: "rgba(52, 195, 143, 0.1)",
+        },
 
-        // {
-        //   iconClass: "fas fa-user-check",
-        //   statName: "Avg Sessions per Student",
-        //   value: "3.8",
-        //   iconColor: "#1bc98e",
-        //   iconContainerColor: "rgba(27, 201, 142, 0.1)",
-        // },
+        {
+          iconClass: "fas fa-piggy-bank",
+          statName: "Budget Remaining",
+          value: "£17,000",
+          iconColor: "#ffbc00",
+          iconContainerColor: "rgba(255, 188, 0, 0.1)",
+        },
       ],
       clientChartLabels: [
         "May",
@@ -192,7 +191,7 @@ export default {
         "Apr",
       ],
       totalClients: {
-        "Rebecca McDonnell": [17, 16, 15, 18, 16, 15, 17, 18, 16, 15, 17, 16],
+        "Rebecca McDonnell": [18, 16, 15, 18, 16, 15, 17, 18, 16, 15, 17, 16],
         "Elly Messo": [14, 15, 16, 14, 15, 16, 14, 15, 14, 16, 15, 14],
         "Lorena  Halpin-Doyle": [
           13, 14, 15, 13, 14, 15, 13, 14, 15, 13, 14, 15,
@@ -254,14 +253,14 @@ body {
 }
 
 h3 {
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 400;
   color: #0f3659;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin-bottom: 15px;
 }

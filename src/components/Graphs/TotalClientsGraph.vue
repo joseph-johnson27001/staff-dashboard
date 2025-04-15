@@ -97,6 +97,7 @@ export default {
             y: {
               grid: { display: true },
               ticks: { color: "#333" },
+              min: 0,
             },
           },
           plugins: {

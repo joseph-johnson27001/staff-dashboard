@@ -11,11 +11,11 @@ import {
   Tooltip,
   Legend,
   Title,
-  PieController, // Change to PieController
+  PieController,
 } from "chart.js";
 import { toRaw } from "vue";
 
-ChartJS.register(PieController, ArcElement, Tooltip, Legend, Title); // Register PieController
+ChartJS.register(PieController, ArcElement, Tooltip, Legend, Title);
 
 export default {
   name: "BudgetPieChart",
@@ -85,7 +85,7 @@ export default {
       ];
 
       this.chartInstance = new ChartJS(this.$refs.budgetPieChart, {
-        type: "pie", // Change the type to "pie"
+        type: "pie",
         data: {
           labels,
           datasets: [
@@ -111,7 +111,7 @@ export default {
             tooltip: {
               callbacks: {
                 label: (tooltipItem) =>
-                  `${tooltipItem.label}: $${tooltipItem.raw.toLocaleString()}`,
+                  `${tooltipItem.label}: £${tooltipItem.raw.toLocaleString()}`,
               },
             },
           },

@@ -85,7 +85,7 @@ export default {
       ];
 
       this.chartInstance = new ChartJS(this.$refs.themesPieChart, {
-        type: "doughnut", // Change type to "doughnut"
+        type: "doughnut",
         data: {
           labels,
           datasets: [
