@@ -27,10 +27,7 @@
 
           <div>
             <h3>Themes</h3>
-            <ThemesChart
-              :total="budget.total"
-              :categories="budget.categories"
-            />
+            <ThemesChart :themes="themes" />
           </div>
         </div>
 
@@ -74,6 +71,7 @@ import TopNav from "./components/Navigation/TopNav.vue";
 import StatisticsCard from "./components/UI/StatisticsCard.vue";
 import GraphCard from "./components/UI/GraphCard.vue";
 import BudgetChart from "./components/Graphs/BudgetChart.vue";
+import ThemesChart from "./components/Graphs/ThemesChart.vue";
 import TotalClientsChart from "./components/Graphs/TotalClientsGraph.vue";
 import TotalSessionHoursChart from "./components/Graphs/TotalSessionHoursGraph.vue";
 
@@ -84,11 +82,19 @@ export default {
     StatisticsCard,
     GraphCard,
     BudgetChart,
+    ThemesChart,
     TotalClientsChart,
     TotalSessionHoursChart,
   },
   data() {
     return {
+      themes: [
+        { label: "Anxiety", value: 20 },
+        { label: "Depression", value: 15 },
+        { label: "Family Issues", value: 10 },
+        { label: "Bullying", value: 8 },
+        { label: "Self-esteem", value: 12 },
+      ],
       budget: {
         total: 50000,
         categories: {
