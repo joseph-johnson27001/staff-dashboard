@@ -94,6 +94,11 @@ export default {
         { label: "Family Issues", value: 10 },
         { label: "Bullying", value: 8 },
         { label: "Self-esteem", value: 12 },
+        { label: "Stress", value: 18 },
+        { label: "Grief", value: 7 },
+        { label: "Anger Management", value: 9 },
+        { label: "PTSD", value: 5 },
+        { label: "Loneliness", value: 6 },
       ],
       budget: {
         total: 50000,

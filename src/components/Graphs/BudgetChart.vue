@@ -11,11 +11,11 @@ import {
   Tooltip,
   Legend,
   Title,
-  DoughnutController,
+  PieController, // Change to PieController
 } from "chart.js";
 import { toRaw } from "vue";
 
-ChartJS.register(DoughnutController, ArcElement, Tooltip, Legend, Title);
+ChartJS.register(PieController, ArcElement, Tooltip, Legend, Title); // Register PieController
 
 export default {
   name: "BudgetPieChart",
@@ -85,7 +85,7 @@ export default {
       ];
 
       this.chartInstance = new ChartJS(this.$refs.budgetPieChart, {
-        type: "doughnut",
+        type: "pie", // Change the type to "pie"
         data: {
           labels,
           datasets: [
