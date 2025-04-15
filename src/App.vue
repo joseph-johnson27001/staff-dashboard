@@ -30,33 +30,68 @@
           </div>
         </div>
 
-        <!-- Dropdown for Counsellor Selection -->
-        <div class="dropdown-container">
-          <label for="counsellor-select"></label>
-          <select id="counsellor-select" v-model="selectedCounsellor">
-            <option
-              v-for="(data, name) in counsellorData"
-              :key="name"
-              :value="name"
-            >
-              {{ name }}
-            </option>
-          </select>
+        <div class="dropdowns">
+          <!-- Dropdown for Weekly/Monthly Selection -->
+          <div class="dropdown-container">
+            <label for="view-select"></label>
+            <select id="view-select" v-model="viewType">
+              <option value="monthly">Monthly</option>
+              <option value="weekly">Weekly</option>
+            </select>
+          </div>
+
+          <!-- Dropdown for Counsellor Selection -->
+          <div class="dropdown-container">
+            <label for="counsellor-select"></label>
+            <select id="counsellor-select" v-model="selectedCounsellor">
+              <option
+                v-for="(data, name) in counsellorData"
+                :key="name"
+                :value="name"
+              >
+                {{ name }}
+              </option>
+            </select>
+          </div>
         </div>
 
         <!-- Graph -->
         <div class="graph-container">
-          <GraphCard :title="`Total Clients – ${selectedCounsellor}`">
+          <GraphCard
+            :title="`Total Clients – ${selectedCounsellor} (${
+              viewType.charAt(0).toUpperCase() + viewType.slice(1)
+            })`"
+          >
             <TotalClientsChart
-              :labels="clientChartLabels"
-              :counts="totalClients[selectedCounsellor]"
+              :labels="
+                viewType === 'monthly'
+                  ? clientChartLabels
+                  : clientChartWeeklyLabels
+              "
+              :counts="
+                viewType === 'monthly'
+                  ? totalClients[selectedCounsellor]
+                  : totalClientsWeekly[selectedCounsellor]
+              "
             />
           </GraphCard>
 
-          <GraphCard :title="`Total Session Hours – ${selectedCounsellor}`">
+          <GraphCard
+            :title="`Total Session Hours – ${selectedCounsellor} (${
+              viewType.charAt(0).toUpperCase() + viewType.slice(1)
+            })`"
+          >
             <TotalSessionHoursChart
-              :labels="clientChartLabels"
-              :session-hours="sessionHours[selectedCounsellor]"
+              :labels="
+                viewType === 'monthly'
+                  ? clientChartLabels
+                  : clientChartWeeklyLabels
+              "
+              :session-hours="
+                viewType === 'monthly'
+                  ? sessionHours[selectedCounsellor]
+                  : sessionHoursWeekly[selectedCounsellor]
+              "
             />
           </GraphCard>
         </div>
@@ -64,7 +99,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import TopNav from "./components/Navigation/TopNav.vue";
 import StatisticsCard from "./components/UI/StatisticsCard.vue";
@@ -145,7 +179,6 @@ export default {
           iconColor: "#00cfe8",
           iconContainerColor: "rgba(0, 207, 232, 0.1)",
         },
-
         {
           iconClass: "fas fa-user-clock",
           statName: "Average Wait Time",
@@ -167,7 +200,6 @@ export default {
           iconColor: "#34c38f",
           iconContainerColor: "rgba(52, 195, 143, 0.1)",
         },
-
         {
           iconClass: "fas fa-piggy-bank",
           statName: "Budget Remaining",
@@ -190,6 +222,60 @@ export default {
         "Mar",
         "Apr",
       ],
+      clientChartWeeklyLabels: [
+        " 1",
+        " 2",
+        " 3",
+        " 4",
+        " 5",
+        " 6",
+        " 7",
+        " 8",
+        " 9",
+        " 10",
+        " 11",
+        " 12",
+        " 13",
+        " 14",
+        " 15",
+        " 16",
+        " 17",
+        " 18",
+        " 19",
+        " 20",
+        " 21",
+        " 22",
+        " 23",
+        " 24",
+        " 25",
+        " 26",
+        " 27",
+        " 28",
+        " 29",
+        " 30",
+        " 31",
+        " 32",
+        " 33",
+        " 34",
+        " 35",
+        " 36",
+        " 37",
+        " 38",
+        " 39",
+        " 40",
+        " 41",
+        " 42",
+        " 43",
+        " 44",
+        " 45",
+        " 46",
+        " 47",
+        " 48",
+        " 49",
+        " 50",
+        " 51",
+        " 52",
+      ],
       totalClients: {
         "Rebecca McDonnell": [18, 16, 15, 18, 16, 15, 17, 18, 16, 15, 17, 16],
         "Elly Messo": [14, 15, 16, 14, 15, 16, 14, 15, 14, 16, 15, 14],
@@ -198,6 +284,38 @@ export default {
         ],
         "Joanne Barnuevo": [11, 12, 10, 11, 12, 11, 12, 10, 11, 12, 11, 12],
         "All Counsellors": [55, 57, 56, 56, 57, 57, 56, 57, 56, 56, 57, 57],
+      },
+      totalClientsWeekly: {
+        "Rebecca McDonnell": [
+          15, 18, 14, 17, 16, 18, 15, 17, 16, 18, 15, 16, 17, 18, 16, 15, 17,
+          18, 16, 15, 16, 17, 15, 16, 18, 17, 16, 15, 17, 16, 18, 15, 17, 16,
+          15, 16, 17, 18, 15, 16, 17, 16, 18, 15, 16, 17, 16, 17, 16, 15, 18,
+          17, 16, 15,
+        ],
+        "Elly Messo": [
+          12, 14, 11, 13, 14, 12, 13, 14, 12, 13, 14, 12, 14, 13, 12, 11, 13,
+          14, 12, 13, 14, 12, 13, 14, 12, 13, 14, 12, 11, 13, 14, 12, 11, 12,
+          13, 14, 12, 13, 14, 12, 11, 13, 14, 12, 13, 12, 14, 13, 14, 13, 12,
+          11,
+        ],
+        "Lorena  Halpin-Doyle": [
+          11, 13, 12, 14, 13, 14, 12, 13, 14, 13, 12, 13, 14, 13, 12, 13, 12,
+          13, 14, 13, 12, 13, 14, 12, 13, 14, 13, 12, 13, 14, 13, 12, 13, 12,
+          13, 14, 13, 12, 13, 14, 13, 12, 13, 12, 13, 14, 13, 12, 13, 14, 13,
+          12,
+        ],
+        "Joanne Barnuevo": [
+          10, 12, 11, 13, 12, 14, 12, 13, 12, 11, 10, 12, 11, 12, 11, 10, 11,
+          12, 11, 12, 13, 12, 11, 12, 11, 12, 11, 10, 12, 11, 12, 10, 11, 12,
+          11, 12, 10, 11, 12, 11, 12, 10, 11, 12, 11, 12, 11, 12, 11, 10, 11,
+          12, 11,
+        ],
+        "All Counsellors": [
+          48, 57, 52, 58, 55, 60, 54, 59, 58, 58, 56, 58, 57, 58, 56, 52, 57,
+          58, 55, 55, 59, 56, 57, 55, 58, 57, 56, 54, 56, 58, 57, 55, 56, 57,
+          58, 55, 56, 57, 55, 56, 57, 55, 58, 56, 57, 58, 55, 56, 57, 56, 55,
+          57, 58,
+        ],
       },
       sessionHours: {
         "Rebecca McDonnell": [34, 32, 30, 36, 32, 30, 34, 36, 32, 30, 34, 32],
@@ -210,6 +328,39 @@ export default {
           110, 114, 112, 112, 114, 114, 112, 114, 112, 112, 114, 114,
         ],
       },
+      sessionHoursWeekly: {
+        "Rebecca McDonnell": [
+          25, 26, 27, 28, 25, 26, 27, 28, 29, 30, 31, 32, 33, 31, 32, 31, 32,
+          33, 30, 29, 30, 32, 33, 31, 30, 29, 30, 32, 33, 31, 30, 28, 27, 28,
+          29, 30, 31, 32, 33, 31, 30, 32, 33, 31, 30, 29, 31, 32, 33, 30, 29,
+          31,
+        ],
+        "Elly Messo": [
+          22, 23, 24, 22, 23, 24, 25, 23, 24, 23, 22, 21, 22, 23, 24, 25, 23,
+          24, 25, 24, 23, 23, 22, 23, 24, 25, 23, 24, 22, 21, 22, 23, 24, 22,
+          23, 24, 23, 22, 21, 22, 23, 24, 25, 23, 22, 24, 25, 23, 24, 22, 21,
+          22,
+        ],
+        "Lorena  Halpin-Doyle": [
+          18, 20, 21, 22, 19, 20, 21, 22, 21, 19, 18, 22, 20, 21, 22, 19, 21,
+          20, 21, 20, 22, 21, 20, 19, 22, 21, 22, 19, 20, 21, 20, 22, 21, 19,
+          20, 21, 22, 19, 20, 21, 22, 19, 20, 21, 22, 19, 20, 22, 21, 20, 21,
+          22,
+        ],
+        "Joanne Barnuevo": [
+          15, 16, 17, 18, 17, 16, 15, 16, 17, 18, 19, 20, 19, 20, 18, 17, 18,
+          19, 20, 18, 19, 20, 19, 18, 16, 17, 18, 17, 19, 20, 21, 20, 19, 18,
+          19, 20, 18, 17, 16, 18, 17, 19, 20, 21, 22, 20, 19, 21, 20, 19, 18,
+          17,
+        ],
+        "All Counsellors": [
+          80, 85, 88, 90, 85, 88, 90, 92, 95, 98, 100, 102, 105, 106, 107, 108,
+          110, 112, 114, 116, 118, 120, 122, 124, 126, 128, 130, 132, 134, 136,
+          138, 140, 142, 144, 146, 148, 150, 152, 154, 156, 158, 160, 162, 164,
+          166, 168, 170, 172, 174, 176, 178, 180, 182, 184,
+        ],
+      },
+      viewType: "monthly",
     };
   },
   watch: {
@@ -265,11 +416,16 @@ h3 {
   margin-bottom: 15px;
 }
 
+.dropdowns {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: flex-end;
+}
+
 .dropdown-container {
   display: flex;
   align-items: center;
-  gap: 10px;
-  width: 100%;
   justify-content: flex-end;
   margin-bottom: 15px;
   margin-top: 15px;
