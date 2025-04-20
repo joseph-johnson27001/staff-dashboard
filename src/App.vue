@@ -164,10 +164,11 @@ export default {
       budget: {
         total: 50000,
         categories: {
-          "Furniture & Equipment": 15000,
-          "Student Materials": 12000,
-          "Training & Development": 5000,
+          "Furniture & Equipment": 12000,
+          "Student Materials": 1600,
+          "Training & Development": 60000,
           Miscellaneous: 3000,
+          Remaining: 3400,
         },
       },
       selectedCounsellor: "All Counsellors",

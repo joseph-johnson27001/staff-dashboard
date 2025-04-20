@@ -69,13 +69,10 @@ export default {
 
       this.destroyChart();
 
-      const rawTotal = toRaw(this.total);
       const categoryEntries = Object.entries(toRaw(this.categories));
-      const spentTotal = categoryEntries.reduce((sum, [, val]) => sum + val, 0);
-      const remaining = Math.max(rawTotal - spentTotal, 0);
 
-      const labels = [...categoryEntries.map(([key]) => key), "Remaining"];
-      const data = [...categoryEntries.map(([, value]) => value), remaining];
+      const labels = [...categoryEntries.map(([key]) => key)];
+      const data = [...categoryEntries.map(([, value]) => value)];
 
       const baseColors = [
         "34, 139, 34",
