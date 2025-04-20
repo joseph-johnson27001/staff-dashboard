@@ -98,7 +98,7 @@
           </GraphCard>
 
           <GraphCard
-            :title="`Ratings – ${selectedCounsellor} (${
+            :title="`Counselling Feedback – ${selectedCounsellor} (${
               viewType.charAt(0).toUpperCase() + viewType.slice(1)
             })`"
           >
@@ -146,15 +146,20 @@ export default {
     return {
       themes: [
         { label: "Anxiety", value: 20 },
-        { label: "Depression", value: 15 },
-        { label: "Family Issues", value: 10 },
-        { label: "Bullying", value: 8 },
-        { label: "Self-esteem", value: 12 },
-        { label: "Stress", value: 18 },
-        { label: "Grief", value: 7 },
-        { label: "Anger Management", value: 9 },
-        { label: "PTSD", value: 5 },
-        { label: "Loneliness", value: 6 },
+        { label: "Disordered Eating", value: 2 },
+        { label: "Neurodiversity", value: 18 },
+        { label: "Suspected Neurodiversity", value: 6 },
+        { label: "Academic Support", value: 12 },
+        { label: "Interpersonal Dynamics", value: 6 },
+        { label: "Intrapersonal", value: 6 },
+        { label: "Grief & Loss", value: 7 },
+        { label: "Trauma", value: 15 },
+        { label: "Emotional Regulation", value: 10 },
+        { label: "Low Mood", value: 8 },
+        { label: "Risk Taking Behaviours", value: 12 },
+        { label: "Sleep", value: 18 },
+        { label: "School Transitions", value: 9 },
+        { label: "School", value: 5 },
       ],
       budget: {
         total: 50000,
@@ -177,64 +182,61 @@ export default {
         {
           iconClass: "fas fa-user-friends",
           statName: "Students In Counselling",
-          value: "45",
+          value: "75",
           iconColor: "#28c76f",
           iconContainerColor: "rgba(40, 199, 111, 0.1)",
         },
         {
           iconClass: "fas fa-ban",
-          statName: "Cancellations",
-          value: "15%",
+          statName: "No Shows",
+          value: "5%",
           iconColor: "#ff6f91",
           iconContainerColor: "rgba(255, 111, 145, 0.1)",
         },
         {
           iconClass: "fas fa-clock",
-          statName: "Wait List",
-          value: "6",
+          statName: "Waitlist",
+          value: "3",
           iconColor: "#ea5455",
           iconContainerColor: "rgba(234, 84, 85, 0.1)",
         },
         {
           iconClass: "fas fa-chair",
           statName: "Available Slots",
-          value: "5",
+          value: "9",
           iconColor: "#00cfe8",
           iconContainerColor: "rgba(0, 207, 232, 0.1)",
         },
         {
           iconClass: "fas fa-user-clock",
           statName: "Average Wait Time",
-          value: "12 days",
+          value: "6 days",
           iconColor: "#7367f0",
           iconContainerColor: "rgba(115, 103, 240, 0.1)",
         },
         {
           iconClass: "fas fa-hand-paper",
           statName: "Total Students Who Accessed Counselling",
-          value: "12",
+          value: "130",
           iconColor: "#ff9f43",
           iconContainerColor: "rgba(255, 159, 67, 0.1)",
         },
         {
           iconClass: "fas fa-wallet",
           statName: "Total Budget",
-          value: "£50,000",
+          value: "฿80,000",
           iconColor: "#34c38f",
           iconContainerColor: "rgba(52, 195, 143, 0.1)",
         },
         {
           iconClass: "fas fa-piggy-bank",
           statName: "Budget Remaining",
-          value: "£17,000",
+          value: "฿25,000",
           iconColor: "#ffbc00",
           iconContainerColor: "rgba(255, 188, 0, 0.1)",
         },
       ],
       clientChartLabels: [
-        "May",
-        "Jun",
-        "Jul",
         "Aug",
         "Sep",
         "Oct",
@@ -244,6 +246,8 @@ export default {
         "Feb",
         "Mar",
         "Apr",
+        "May",
+        "Jun",
       ],
       clientChartWeeklyLabels: [
         " 1",

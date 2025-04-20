@@ -125,7 +125,7 @@ export default {
             y: {
               beginAtZero: true,
               ticks: {
-                callback: (value) => `£${value.toLocaleString()}`,
+                callback: (value) => `฿${value.toLocaleString()}`,
                 color: "#333",
               },
             },
@@ -141,7 +141,7 @@ export default {
             },
             tooltip: {
               callbacks: {
-                label: (tooltipItem) => `£${tooltipItem.raw.toLocaleString()}`,
+                label: (tooltipItem) => `฿${tooltipItem.raw.toLocaleString()}`,
               },
             },
           },

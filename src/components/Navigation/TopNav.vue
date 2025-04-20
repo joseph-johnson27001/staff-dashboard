@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="nav-container">
-      <span class="title">Counsellor Dashboard</span>
+      <span class="title">Counselling Dashboard</span>
     </div>
   </nav>
 </template>

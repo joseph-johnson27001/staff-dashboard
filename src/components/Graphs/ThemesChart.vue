@@ -1,31 +1,21 @@
 <template>
   <div class="chart-container">
-    <canvas ref="themesBarChart"></canvas>
+    <canvas ref="themesPieChart"></canvas>
   </div>
 </template>
 
 <script>
 import {
   Chart as ChartJS,
-  BarElement,
-  CategoryScale,
-  LinearScale,
+  PieController,
+  ArcElement,
   Tooltip,
   Legend,
   Title,
-  BarController,
 } from "chart.js";
 import { toRaw } from "vue";
 
-ChartJS.register(
-  BarController,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  Legend,
-  Title
-);
+ChartJS.register(PieController, ArcElement, Tooltip, Legend, Title);
 
 export default {
   name: "ThemesChart",
@@ -63,7 +53,7 @@ export default {
   },
   methods: {
     renderChart() {
-      if (!this.isMounted || !this.$refs.themesBarChart) return;
+      if (!this.isMounted || !this.$refs.themesPieChart) return;
 
       this.destroyChart();
 
@@ -96,46 +86,32 @@ export default {
 
       const backgroundColors = baseColors
         .slice(0, labels.length)
-        .map((rgb) => `rgba(${rgb}, 0.2)`);
-      const borderColors = baseColors
-        .slice(0, labels.length)
-        .map((rgb) => `rgba(${rgb}, 1)`);
+        .map((rgb) => `rgba(${rgb}, 0.6)`);
 
-      this.chartInstance = new ChartJS(this.$refs.themesBarChart, {
-        type: "bar",
+      this.chartInstance = new ChartJS(this.$refs.themesPieChart, {
+        type: "pie",
         data: {
           labels,
           datasets: [
             {
               data,
               backgroundColor: backgroundColors,
-              borderColor: borderColors,
-              hoverBackgroundColor: backgroundColors.map((c) =>
-                c.replace("0.2", "0.4")
-              ),
+
+              hoverOffset: 10,
               borderWidth: 1,
+              borderColor: "#fff",
             },
           ],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: {
-                color: "#333",
-              },
-            },
-            x: {
-              ticks: {
-                color: "#333",
-              },
-            },
-          },
           plugins: {
             legend: {
-              display: false,
+              position: "right",
+              labels: {
+                color: "#333",
+              },
             },
             tooltip: {
               callbacks: {
