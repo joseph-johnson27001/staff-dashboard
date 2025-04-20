@@ -1,34 +1,24 @@
 <template>
   <div class="chart-container">
-    <canvas ref="budgetBarChart"></canvas>
+    <canvas ref="budgetPieChart"></canvas>
   </div>
 </template>
 
 <script>
 import {
   Chart as ChartJS,
-  BarElement,
-  CategoryScale,
-  LinearScale,
+  PieController,
+  ArcElement,
   Tooltip,
   Legend,
   Title,
-  BarController,
 } from "chart.js";
 import { toRaw } from "vue";
 
-ChartJS.register(
-  BarController,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  Legend,
-  Title
-);
+ChartJS.register(PieController, ArcElement, Tooltip, Legend, Title);
 
 export default {
-  name: "BudgetBarChart",
+  name: "BudgetPieChart",
   props: {
     total: {
       type: Number,
@@ -65,14 +55,13 @@ export default {
   },
   methods: {
     renderChart() {
-      if (!this.isMounted || !this.$refs.budgetBarChart) return;
+      if (!this.isMounted || !this.$refs.budgetPieChart) return;
 
       this.destroyChart();
 
       const categoryEntries = Object.entries(toRaw(this.categories));
-
-      const labels = [...categoryEntries.map(([key]) => key)];
-      const data = [...categoryEntries.map(([, value]) => value)];
+      const labels = categoryEntries.map(([key]) => key);
+      const data = categoryEntries.map(([, value]) => value);
 
       const baseColors = [
         "34, 139, 34",
@@ -94,51 +83,36 @@ export default {
 
       const backgroundColors = baseColors
         .slice(0, labels.length)
-        .map((rgb) => `rgba(${rgb}, 0.2)`);
-      const borderColors = baseColors
-        .slice(0, labels.length)
-        .map((rgb) => `rgba(${rgb}, 1)`);
+        .map((rgb) => `rgba(${rgb}, 0.6)`);
 
-      this.chartInstance = new ChartJS(this.$refs.budgetBarChart, {
-        type: "bar",
+      this.chartInstance = new ChartJS(this.$refs.budgetPieChart, {
+        type: "pie",
         data: {
           labels,
           datasets: [
             {
               data,
               backgroundColor: backgroundColors,
-              borderColor: borderColors,
-              hoverBackgroundColor: backgroundColors.map((c) =>
-                c.replace("0.2", "0.4")
-              ),
-              borderWidth: 1,
+              hoverOffset: 10,
+              borderWidth: 2,
+              borderColor: "#fff",
             },
           ],
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: {
-                callback: (value) => `฿${value.toLocaleString()}`,
-                color: "#333",
-              },
-            },
-            x: {
-              ticks: {
-                color: "#333",
-              },
-            },
-          },
           plugins: {
             legend: {
-              display: false,
+              position: "right",
+              labels: {
+                color: "#333",
+              },
             },
             tooltip: {
               callbacks: {
-                label: (tooltipItem) => `฿${tooltipItem.raw.toLocaleString()}`,
+                label: (tooltipItem) =>
+                  `${tooltipItem.label}: ฿${tooltipItem.raw.toLocaleString()}`,
               },
             },
           },
