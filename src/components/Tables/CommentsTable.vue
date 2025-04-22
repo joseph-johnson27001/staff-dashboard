@@ -88,6 +88,7 @@ table {
   background-color: white;
   height: 100%;
   border: 1px solid #ccc;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 4px;
 }
 thead {
   background-color: #0288d1;
