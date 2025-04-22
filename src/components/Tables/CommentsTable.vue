@@ -3,7 +3,7 @@
     <table>
       <thead>
         <tr>
-          <th>Comment</th>
+          <th>Comments</th>
           <th>Counsellor</th>
           <th>Date</th>
         </tr>
@@ -18,11 +18,15 @@
     </table>
 
     <div class="pagination">
-      <button @click="prevPage" :disabled="currentPage === 1">Prev</button>
-      <span>Page {{ currentPage }} of {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">
-        Next
-      </button>
+      <span
+        v-for="page in totalPages"
+        :key="page"
+        class="page-number"
+        :class="{ active: currentPage === page }"
+        @click="goToPage(page)"
+      >
+        {{ page }}
+      </span>
     </div>
   </div>
 </template>
@@ -69,40 +73,58 @@ export default {
     },
   },
   methods: {
-    nextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-      }
-    },
-    prevPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-      }
+    goToPage(page) {
+      this.currentPage = page;
     },
   },
 };
 </script>
 
 <style scoped>
-.comments-table {
-  padding: 1rem;
-}
 table {
+  font-family: "Assistant";
   width: 100%;
   border-collapse: collapse;
+  background-color: white;
+  height: 100%;
+  border: 1px solid #ccc;
 }
 thead {
-  background-color: #f0f0f0;
+  background-color: #0288d1;
+  color: white;
+  text-align: left;
 }
+
 td,
 th {
-  padding: 0.5rem;
+  padding: 7px;
   border: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+  font-weight: 400;
 }
+
 .pagination {
-  margin-top: 1rem;
+  margin-top: 10px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  padding-bottom: 10px;
+}
+
+.page-number {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.page-number:hover {
+  background-color: #f0f0f0;
+}
+
+.page-number.active {
+  background-color: #007bff;
+  color: white;
 }
 </style>

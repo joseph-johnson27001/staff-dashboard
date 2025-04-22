@@ -115,13 +115,12 @@
               "
             />
           </GraphCard>
-          <GraphCard title="Comments">
-            <CommentsTable
-              :comments="comments"
-              :view-type="viewType"
-              :selected-counsellor="selectedCounsellor"
-            />
-          </GraphCard>
+
+          <CommentsTable
+            :comments="comments"
+            :view-type="viewType"
+            :selected-counsellor="selectedCounsellor"
+          />
         </div>
       </div>
     </div>
