@@ -115,6 +115,13 @@
               "
             />
           </GraphCard>
+          <GraphCard title="Comments">
+            <CommentsTable
+              :comments="comments"
+              :view-type="viewType"
+              :selected-counsellor="selectedCounsellor"
+            />
+          </GraphCard>
         </div>
       </div>
     </div>
@@ -129,6 +136,7 @@ import ThemesChart from "./components/Graphs/ThemesChart.vue";
 import TotalClientsChart from "./components/Graphs/TotalClientsGraph.vue";
 import TotalSessionHoursChart from "./components/Graphs/TotalSessionHoursGraph.vue";
 import RatingsGraph from "./components/Graphs/RatingsGraph.vue";
+import CommentsTable from "@/components/Tables/CommentsTable.vue";
 
 export default {
   name: "App",
@@ -141,9 +149,52 @@ export default {
     TotalClientsChart,
     TotalSessionHoursChart,
     RatingsGraph,
+    CommentsTable,
   },
   data() {
     return {
+      comments: [
+        {
+          text: "Joanne always listens attentively and offers thoughtful insights.",
+          counsellor: "Joanne Barnuevo",
+          date: "2025-04-05",
+        },
+        {
+          text: "Her calm and compassionate nature really put me at ease.",
+          counsellor: "Joanne Barnuevo",
+          date: "2025-04-08",
+        },
+        {
+          text: "Rebecca made me feel heard and supported throughout.",
+          counsellor: "Rebecca McDonnell",
+          date: "2025-04-06",
+        },
+        {
+          text: "She is incredibly understanding and gives great advice.",
+          counsellor: "Rebecca McDonnell",
+          date: "2025-04-09",
+        },
+        {
+          text: "Elly has a warm and reassuring presence that helped me open up.",
+          counsellor: "Elly Messo",
+          date: "2025-04-04",
+        },
+        {
+          text: "I felt truly respected and supported during my session with Elly.",
+          counsellor: "Elly Messo",
+          date: "2025-04-10",
+        },
+        {
+          text: "Lorena was professional and kind — I felt very comfortable talking to her.",
+          counsellor: "Lorena Halpin-Doyle",
+          date: "2025-04-03",
+        },
+        {
+          text: "She helped me see things from a new, more positive perspective.",
+          counsellor: "Lorena Halpin-Doyle",
+          date: "2025-04-07",
+        },
+      ],
       themes: [
         { label: "Anxiety", value: 20 },
         { label: "Disordered Eating", value: 2 },
